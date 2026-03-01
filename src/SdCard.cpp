@@ -19,19 +19,17 @@
 // SdCard.cpp
 // Simplified implementation of SD Card
 
-#include <string.h>
-
 #include "SdCard.h"
 
 using namespace std;
 
 
-bool SdCard::assignFileName(string fileName)
+bool SdCard::assignFileName(const string& fileName)
 {
     m_fileName = fileName;
 
-    fileName = palMakeFullFileName(fileName);
-    m_file.open(fileName.c_str(), m_readOnly ? "r" : "r+");
+    std::string fullFileName = palMakeFullFileName(fileName);
+    m_file.open(fullFileName, m_readOnly ? "r" : "r+");
 
     if (!m_file.isOpen())
         return false;
@@ -114,7 +112,7 @@ void SdCard::setReadOnly(bool ro)
 {
     if (ro != m_readOnly) {
         m_readOnly = ro;
-        if (m_fileName != "")
+        if (!m_fileName.empty())
             assignFileName(m_fileName);
     }
 }

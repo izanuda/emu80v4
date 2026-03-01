@@ -52,14 +52,14 @@ public:
     uint8_t io(uint8_t value);
     void setCs(bool cs) {m_cs = cs;}
 
-    bool assignFileName(std::string fileName);
+    bool assignFileName(const std::string& fileName);
 
     static EmuObject* create(const EmuValuesList&) {return new SdCard();}
 
 private:
     PalFile m_file;
     bool m_readOnly = false;
-    std::string m_fileName = "";
+    std::string m_fileName;
 
     SdState m_state = SDSTATE_WAITING_FOR_COMMAND;
     bool m_cs = true; //false
