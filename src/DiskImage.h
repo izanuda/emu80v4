@@ -39,13 +39,13 @@ public:
     bool assignFileName(std::string fileName);
     void chooseFile();
     void close();
-    int64_t getSize();
+    int64_t getSize() const;
     void setWriteProtection(bool isWriteProtected);
-    inline void setLabel(std::string label) {m_label = label;}
-    inline std::string getLabel() {return m_label;}
+    inline void setLabel(const std::string& label) {m_label = label;}
+    inline const std::string& getLabel() const {return m_label;}
 
-    bool getWriteProtectStatus();
-    bool getImagePresent() {return m_file.isOpen();}
+    bool getWriteProtectStatus() const;
+    bool getImagePresent() const {return m_file.isOpen();}
 
     void setCurOffset(int offset);
     bool read(uint8_t* buf, int len);

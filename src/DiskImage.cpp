@@ -51,7 +51,7 @@ bool DiskImage::assignFileName(string fileName)
     }
 
     if (!m_file.isOpen())
-        m_fileName = "";
+        m_fileName.clear();
 
     reset();
 
@@ -70,7 +70,7 @@ void DiskImage::chooseFile()
 {
     string fileName = palOpenFileDialog("Open floppy disk image file", m_filter, false, m_platform->getWindow());
     g_emulation->restoreFocus();
-    if (fileName != "")
+    if (!fileName.empty())
         assignFileName(fileName);
 }
 
@@ -82,7 +82,7 @@ void DiskImage::close()
 }
 
 
-int64_t DiskImage::getSize()
+int64_t DiskImage::getSize() const
 {
     return m_file.getSize();
 }
@@ -104,7 +104,7 @@ void DiskImage::setWriteProtection(bool isWriteProtected)
 }
 
 
-bool DiskImage::getWriteProtectStatus()
+bool DiskImage::getWriteProtectStatus() const
 {
     return m_isWriteProtected;
 }
@@ -188,7 +188,7 @@ string DiskImage::getPropertyStringValue(const string& propertyName)
     string res;
 
     res = EmuObject::getPropertyStringValue(propertyName);
-    if (res != "")
+    if (!res.empty())
         return res;
 
     if (propertyName == "label")
@@ -202,7 +202,7 @@ string DiskImage::getPropertyStringValue(const string& propertyName)
     else if (propertyName == "autoMount")
         return m_autoMount ? "yes" : "no";
 
-    return "";
+    return string();
 }
 
 
