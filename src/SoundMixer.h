@@ -111,7 +111,7 @@ class SoundMixer : public ActiveDevice
         void setVolume(int volume);
 
         // возвращает текущий уровень громкости
-        int getVolume();
+        int getVolume() const;
 
     private:
         // Список источников звука

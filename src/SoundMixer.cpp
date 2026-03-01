@@ -93,7 +93,7 @@ void SoundMixer::setVolume(int volume)
 }
 
 
-int SoundMixer::getVolume()
+int SoundMixer::getVolume() const
 {
     return m_volume;
 }
