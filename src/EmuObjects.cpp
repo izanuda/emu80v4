@@ -311,11 +311,11 @@ string EmuObjectGroup::getPropertyStringValue(const string& propertyName)
     string res;
 
     res = EmuObject::getPropertyStringValue(propertyName);
-    if (res != "")
+    if (!res.empty())
         return res;
 
     if (!m_objectList.empty())
         return (*(m_objectList.begin()))->getPropertyStringValue(propertyName);
 
-    return "";
+    return string();
 }

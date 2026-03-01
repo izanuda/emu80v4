@@ -185,13 +185,13 @@ class IActive
     public:
         IActive();
         virtual ~IActive();
-        uint64_t getClock() {return m_curClock;}
+        uint64_t getClock() const {return m_curClock;}
         //void setClock(uint64_t clock) {m_curClock = clock;}
         void pause() {m_isPaused = true; m_curClock = -1;}
         void resume() {m_isPaused = false;}
         void syncronize(uint64_t curClock) {m_curClock = curClock;}
         void syncronize();
-        inline bool isPaused() {return m_isPaused;}
+        inline bool isPaused() const {return m_isPaused;}
         virtual void operate() = 0;
 
     protected:
