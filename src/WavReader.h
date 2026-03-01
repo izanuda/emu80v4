@@ -46,7 +46,7 @@ class WavReader : public EmuObject
 
         bool loadFile(const std::string& fileName, TapeRedirector* tapeRedirecotr = nullptr);
         bool chooseAndLoadFile();
-        bool isPlaying() {return m_isOpen;}
+        bool isPlaying() const {return m_isOpen;}
         void unlinkTapeRedirector(TapeRedirector* tapeRedirecotr);
 
         bool getCurValue();
