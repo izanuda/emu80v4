@@ -34,9 +34,10 @@ class Ram : public AddressableDevice
         virtual ~Ram();
         void writeByte(int addr, uint8_t value) override;
         uint8_t readByte(int addr) override;
-        /*const*/ uint8_t* getDataPtr() {return m_buf ? m_buf : m_extBuf;}
+        /*const*/ uint8_t* getDataPtr() const {return m_buf ? m_buf : m_extBuf;}
         uint8_t& operator[](int nAddr) {return m_buf[nAddr];} // no check for borders, use with caution
-        int getSize() {return m_size;}
+        const uint8_t& operator[](int nAddr) const {return m_buf[nAddr];} // no check for borders, use with caution
+        int getSize() const {return m_size;}
 
         static EmuObject* create(const EmuValuesList& parameters) {return parameters[0].isInt() ? new Ram(parameters[0].asInt()) : nullptr;}
 
@@ -58,9 +59,9 @@ class Rom : public AddressableDevice
         virtual ~Rom();
         void writeByte(int, uint8_t)  override {}
         uint8_t readByte(int addr) override;
-        int getSize() {return m_size;}
-        virtual const uint8_t* getDataPtr() {return m_buf;}
-        virtual const uint8_t& operator[](int nAddr) {return m_buf[nAddr];} // no check for borders, use with caution
+        int getSize() const {return m_size;}
+        virtual const uint8_t* getDataPtr() const {return m_buf;}
+        virtual const uint8_t& operator[](int nAddr) const {return m_buf[nAddr];} // no check for borders, use with caution
 
         static EmuObject* create(const EmuValuesList& parameters) {return parameters[1].isInt() ? new Rom(parameters[1].asInt(), parameters[0].asString(), parameters[2].asInt()) : nullptr;}
 
