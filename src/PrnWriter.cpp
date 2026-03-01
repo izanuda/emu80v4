@@ -47,7 +47,7 @@ void PrnWriter::startPrinting()
 
     if (!m_file.open(m_fileName, "w")) {
         reportError("Can't open file " + m_fileName + " for writing!\n");
-        m_fileName = "";
+        m_fileName.clear();
         return;
     }
 
@@ -60,7 +60,7 @@ void PrnWriter::stopPrinting()
     if (m_isOpen) {
         m_file.close();
         m_isOpen = false;
-        m_fileName = "";
+        m_fileName.clear();
     }
 }
 
@@ -91,7 +91,7 @@ string PrnWriter::getPropertyStringValue(const string& propertyName)
     string res;
 
     res = EmuObject::getPropertyStringValue(propertyName);
-    if (res != "")
+    if (!res.empty())
         return res;
 
     if (propertyName == "fileName")

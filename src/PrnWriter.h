@@ -36,9 +36,9 @@ class PrnWriter : public EmuObject
         void startPrinting();
         void stopPrinting();
         void printByte(uint8_t bt);
-        bool isPrinting() {return m_isOpen;}
-        bool getReady() {return m_isOpen;}
-        const std::string& getFileName() {return m_fileName;}
+        bool isPrinting() const {return m_isOpen;}
+        bool getReady() const {return m_isOpen;}
+        const std::string& getFileName() const {return m_fileName;}
 
     private:
         PalFile m_file;
