@@ -124,8 +124,7 @@ Rom::Rom(int memSize, const string& fileName, int offset)
 
 Rom::~Rom()
 {
-    if (!m_buf)
-        delete[] m_buf;
+    delete[] m_buf;
 }
 
 
