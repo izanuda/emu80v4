@@ -28,8 +28,8 @@ class Ram : public AddressableDevice
 {
     public:
         //Ram();
-        Ram(unsigned memSize);
-        Ram(uint8_t* buf, unsigned memSize);
+        Ram(int memSize);
+        Ram(uint8_t* buf, int memSize);
         //Ram(int memSize, std::string fileName);
         virtual ~Ram();
         void writeByte(int addr, uint8_t value) override;
@@ -55,7 +55,7 @@ class Rom : public AddressableDevice
 {
     public:
         Rom();
-        Rom(unsigned memSize, std::string fileName, unsigned offset = 0);
+        Rom(int memSize, const std::string& fileName, int offset = 0);
         virtual ~Rom();
         void writeByte(int, uint8_t)  override {}
         uint8_t readByte(int addr) override;

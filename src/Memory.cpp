@@ -33,7 +33,7 @@ using namespace std;
 
 
 
-Ram::Ram(unsigned memSize)
+Ram::Ram(int memSize)
 {
     m_supportsTags = true;
     m_extBuf = nullptr;
@@ -44,7 +44,7 @@ Ram::Ram(unsigned memSize)
 
 
 
-Ram::Ram(uint8_t* buf, unsigned memSize)
+Ram::Ram(uint8_t* buf, int memSize)
 {
     m_supportsTags = true;
     m_extBuf = buf;
@@ -109,7 +109,7 @@ Rom::Rom()
 
 
 
-Rom::Rom(unsigned memSize, string fileName, unsigned offset)
+Rom::Rom(int memSize, const string& fileName, int offset)
 {
     m_buf = new uint8_t [memSize];
     memset(m_buf, 0xFF, memSize);
