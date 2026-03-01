@@ -34,7 +34,7 @@ class KbdTapper : public ActiveDevice
 
         void setDelayMs(uint64_t delay);
 
-        void typeText(std::string str);
+        void typeText(const std::string& str);
 
         static EmuObject* create(const EmuValuesList&) {return new KbdTapper();}
 

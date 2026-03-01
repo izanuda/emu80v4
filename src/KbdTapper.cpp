@@ -42,7 +42,7 @@ void KbdTapper::reset()
 }
 
 
-void KbdTapper::typeText(std::string str)
+void KbdTapper::typeText(const std::string& str)
 {
     if (m_typing) {
         stop();
@@ -158,7 +158,7 @@ string KbdTapper::getPropertyStringValue(const string& propertyName)
     string res;
 
     res = EmuObject::getPropertyStringValue(propertyName);
-    if (res != "")
+    if (!res.empty())
         return res;
 
     if (propertyName == "pasting")
