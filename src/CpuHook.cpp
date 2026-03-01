@@ -38,7 +38,7 @@ CpuHook::~CpuHook()
 }
 
 
-void CpuHook::setSignature(std::string signature)
+void CpuHook::setSignature(const string& signature)
 {
     unsigned bt;
     for (unsigned i = 0; i <= signature.size() - 2; i += 2) {
@@ -53,7 +53,7 @@ void CpuHook::setSignature(std::string signature)
 }
 
 
-bool CpuHook::checkSignature()
+bool CpuHook::checkSignature() const
 {
     AddressableDevice* as = m_cpu->getAddrSpace();
     for (unsigned i = 0; i < m_signatureLen; i++)
@@ -91,13 +91,13 @@ string CpuHook::getPropertyStringValue(const string& propertyName)
     string res;
 
     res = EmuObject::getPropertyStringValue(propertyName);
-    if (res != "")
+    if (!res.empty())
         return res;
 
     if (propertyName == "enabled")
         return m_isEnabled ? "yes" : "no";
 
-    return "";
+    return string();
 }
 
 

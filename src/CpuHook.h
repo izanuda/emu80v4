@@ -43,19 +43,19 @@ class CpuHook : public EmuObject
         virtual bool hookProc() = 0; // returns false if continue
 
         void setEnabled(bool isEnabled);
-        inline bool getEnabled() {return m_isEnabled;}
+        inline bool getEnabled() const {return m_isEnabled;}
 
-        inline int getHookAddr() {return m_hookAddr;}
+        inline int getHookAddr() const {return m_hookAddr;}
 
         void setTapeRedirector(TapeRedirector* file) {m_file = file;}
-        void setSignature(std::string signature);
+        void setSignature(const std::string& signature);
 
     protected:
         Cpu* m_cpu = nullptr;
         bool m_isEnabled = true;
         TapeRedirector* m_file = nullptr;
         bool m_hasSignature = false;
-        bool checkSignature();
+        bool checkSignature() const;
 
     private:
         int m_hookAddr;
