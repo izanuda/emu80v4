@@ -1369,13 +1369,13 @@ uint8_t Pk8000RomDisk::readByte(int addr)
 }
 
 
-const uint8_t* Pk8000RomDisk::getDataPtr()
+const uint8_t* Pk8000RomDisk::getDataPtr() const
 {
     return m_buf + m_curPage * 16384;
 }
 
 
-const uint8_t& Pk8000RomDisk::operator[](int nAddr)
+const uint8_t& Pk8000RomDisk::operator[](int nAddr) const
 {
     return m_buf[m_curPage * 16384 + nAddr]; // no check for borders, use with caution
 }

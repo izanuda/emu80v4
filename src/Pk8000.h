@@ -459,8 +459,8 @@ public:
     Pk8000RomDisk(unsigned memSize, std::string fileName) : Rom(memSize, fileName) {}
 
     uint8_t readByte(int addr) override;
-    const uint8_t* getDataPtr() override;
-    virtual const uint8_t& operator[](int nAddr) override;
+    const uint8_t* getDataPtr() const override;
+    virtual const uint8_t& operator[](int nAddr) const override;
 
     void setPage(int page);
 
