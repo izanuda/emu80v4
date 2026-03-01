@@ -96,7 +96,7 @@ EmuObject::~EmuObject()
     for (auto& outputItem: m_outputMap)
         delete outputItem.second;
 
-    if (this != g_emulation)
+    if (g_emulation)
         g_emulation->removeObject(this);
 }
 

@@ -111,11 +111,20 @@ Emulation::~Emulation()
     delete m_mixer;
     delete m_prnWriter;
 
-    // Удяляем оставшиеся объекты
-    list<EmuObject*> tempList = m_objectList; // второй список, так как в деструкторе удаление из основного списка
-    for (auto it = tempList.begin(); it != tempList.end(); it++)
-        if ((*it) != this)
-            delete (*it);
+    // Удаляем оставшиеся объекты (с конца)
+    while (!m_objectList.empty()) {
+        auto it = m_objectList.rbegin();
+        if ((*it) == this) {
+            ++it;
+            if (it == m_objectList.rend()) {
+                break; // остался только этот
+            }
+        }
+
+        delete (*it);
+    }
+
+    g_emulation = nullptr;
 }
 
 
