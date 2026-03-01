@@ -60,8 +60,6 @@ class CpuHook : public EmuObject
     private:
         int m_hookAddr;
         std::vector<uint8_t> m_signature;
-        unsigned m_signatureLen = 0;
-        uint8_t* m_signatureBytes = nullptr;
 };
 
 

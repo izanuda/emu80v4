@@ -47,17 +47,18 @@ void CpuHook::setSignature(const string& signature)
         iss >> hex >> bt;
         m_signature.push_back(bt);
     }
-    m_signatureLen = m_signature.size();
-    m_signatureBytes = m_signature.data();
-    m_hasSignature = m_signatureLen > 0 ? true : false;
+    m_hasSignature = !m_signature.empty();
 }
 
 
 bool CpuHook::checkSignature() const
 {
+    if (m_signature.empty())
+        return false;
+
     AddressableDevice* as = m_cpu->getAddrSpace();
-    for (unsigned i = 0; i < m_signatureLen; i++)
-        if (m_signatureBytes[i] != as->readByte(m_hookAddr + i))
+    for (unsigned i = 0; i < m_signature.size(); i++)
+        if (m_signature.at(i) != as->readByte(m_hookAddr + i))
             return false;
     return true;
 }
