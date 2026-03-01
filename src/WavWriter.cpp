@@ -55,22 +55,7 @@ WavWriter::WavWriter(Platform* platform, const string& fileName, bool cswFormat)
 
 WavWriter::~WavWriter()
 {
-    if (!m_open)
-        return;
-
-    if (!m_cswFormat)
-    {
-        // WAV
-        m_file.seek(4);
-        m_file.write32(m_size + 36); // litte endian only!
-        m_file.seek(40);
-        m_file.write32(m_size);      // litte endian only!
-    } else {
-        writeCswSequence();
-        m_file.seek(0x1C);
-        m_file.write8(m_initialValue ? 0 : 1);
-    }
-    m_file.close();
+    close();
 }
 
 
@@ -81,6 +66,33 @@ void WavWriter::writeCswSequence()
     else {
         m_file.write8(0);
         m_file.write32(m_cswRleCounter);
+    }
+}
+
+void WavWriter::writeWavSize()
+{
+    m_file.seek(4);
+    m_file.write32(m_size + 36); // litte endian only!
+    m_file.seek(40);
+    m_file.write32(m_size);      // litte endian only!
+}
+
+void WavWriter::close()
+{
+    if (m_open)
+    {
+        if (!m_cswFormat)
+        {
+            // WAV
+            writeWavSize();
+        } else {
+            writeCswSequence();
+            m_file.seek(0x1C);
+            m_file.write8(m_initialValue ? 0 : 1);
+        }
+        m_file.close();
+
+        m_open = false;
     }
 }
 

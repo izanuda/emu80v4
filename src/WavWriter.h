@@ -81,6 +81,8 @@ class WavWriter : public ActiveDevice
         bool m_cswCurValue = false;
 
         void writeCswSequence();
+        void writeWavSize();
+        void close();
 };
 
 
