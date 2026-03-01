@@ -49,7 +49,7 @@ void TapeRedirector::reset()
 }
 
 
-void TapeRedirector::assignFile(string fileName, string rwMode)
+void TapeRedirector::assignFile(const string& fileName, const string& rwMode)
 {
     m_permanentFileName = fileName;
     m_rwMode = rwMode;
@@ -61,7 +61,7 @@ void TapeRedirector::openFile()
     if (m_isOpen)
         closeFile();
 
-    if (m_permanentFileName == "") {
+    if (m_permanentFileName.empty()) {
         m_fileName = palOpenFileDialog(m_rwMode == "w" ? "Save tape file" : "Open tape file", m_filter + "|Wav Files (*.wav)|*.wav;*.WAV|CSW Files (*.csw)|*.csw;*.CSW", m_rwMode == "w", m_platform->getWindow());
         g_emulation->restoreFocus();
     }
@@ -221,7 +221,7 @@ void TapeRedirector::writeByte(uint8_t bt)
 }
 
 
-int TapeRedirector::getPos()
+int TapeRedirector::getPos() const
 {
     if (!m_isOpen)
         return 0;
@@ -230,7 +230,7 @@ int TapeRedirector::getPos()
 }
 
 
-bool TapeRedirector::isEof()
+bool TapeRedirector::isEof() const
 {
     if (!m_isOpen)
         return true;
@@ -239,7 +239,7 @@ bool TapeRedirector::isEof()
 }
 
 
-bool TapeRedirector::isOpen()
+bool TapeRedirector::isOpen() const
 {
     return m_isOpen;
 }
@@ -303,14 +303,14 @@ string TapeRedirector::getPropertyStringValue(const string& propertyName)
     string res;
 
     res = EmuObject::getPropertyStringValue(propertyName);
-    if (res != "")
+    if (!res.empty())
         return res;
 
     if (propertyName == "currentFile" && m_isOpen) {
         return m_fileName;
     }
 
-    return "";
+    return string();
 }
 
 
@@ -333,19 +333,19 @@ void TapeRedirector::updateTimer()
 }
 
 
-bool TapeRedirector::isLvt()
+bool TapeRedirector::isLvt() const
 {
     return m_lvt;
 }
 
 
-bool TapeRedirector::isTzx()
+bool TapeRedirector::isTzx() const
 {
     return m_tzx;
 }
 
 
-bool TapeRedirector::isTap()
+bool TapeRedirector::isTap() const
 {
     return m_tap;
 }

@@ -41,20 +41,20 @@ class TapeRedirector : public EmuObject
         void closeFile();
         void setFilePos(unsigned pos);
 
-        void assignFile(std::string fileName, std::string rwMode);
+        void assignFile(const std::string &fileName, const std::string& rwMode);
         uint8_t readByte();
         uint8_t peekByte();
         void writeByte(uint8_t bt);
         bool waitForSequence(const uint8_t* seq, int len);
         void skipSeq(const uint8_t* seq, int len);
         uint8_t readByteSkipSeq(const uint8_t* seq, int len);
-        int getPos();
-        bool isEof();
-        bool isOpen();
+        int getPos() const;
+        bool isEof() const;
+        bool isOpen() const;
         bool isCancelled();
-        bool isLvt();
-        bool isTzx();
-        bool isTap();
+        bool isLvt() const;
+        bool isTzx() const;
+        bool isTap() const;
         void switchToNextLvt();
         int advanceToNextBlock();
 
